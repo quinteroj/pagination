@@ -1,0 +1,59 @@
+{
+    "name":"Paginator",
+    "slug":"cbpaginator",
+    "version":"1.0.0",
+    "author":"Javier Quintero",
+    "shortDescription":"This module builds a pagination struct for API responses and custom data tables.",
+    "location":"",
+    "directory":"",
+    "createPackageDirectory":true,
+    "packageDirectory":"",
+    "homepage":"https://github.com/quinteroj/pagination",
+    "documentation":"https://github.com/quinteroj/pagination",
+    "repository":{
+        "type":"github",
+        "url":"https://github.com/quinteroj/pagination"
+    },
+    "bugs":"",
+    "description":"",
+    "instructions":"readme.md",
+    "changelog":"",
+    "type":"",
+    "keywords":[
+
+    ],
+    "private":false,
+    "engines":[
+        {
+            "type":"lucee",
+            "version":">=4.5.x"
+        },
+        {
+            "type":"adobe",
+            "version":">=10.0.0"
+        }
+    ],
+    "defaultEngine":"",
+    "defaultPort":0,
+    "projectURL":"https://github.com/quinteroj/pagination",
+    "license":[
+        {
+            "type":"",
+            "url":""
+        }
+    ],
+    "contributors":[
+
+    ],
+    "dependencies":{
+
+    },
+    "devDependencies":{
+
+    },
+    "installPaths":{
+    },
+    "ignore":[
+
+    ]
+}

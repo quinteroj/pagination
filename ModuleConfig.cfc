@@ -5,64 +5,45 @@
 component {
 
 	// Module Properties
-	this.title 				= "Pagination";
+	this.title 				= "Paginator";
 	this.author 			= "Javier Quintero";
 	this.webURL 			= "https://www.ortussolutions.com";
 	this.description 		= "This module builds the pagination struct for API responses and custom data tables.";
 	this.viewParentLookup 	= true;
 	this.layoutParentLookup = true;
 	// URL Entry Point
-	this.entryPoint			= "pagination";
+	this.entryPoint			= "cbpaginator";
 	// Model Namespace
-	this.modelNamespace 	= "pagination";
+	this.modelNamespace 	= "cbpaginator";
 	// CF Mapping
-	this.cfmapping 			= "pagination";
+	this.cfmapping 			= "cbpaginator";
 	this.dependencies 		= [ ];
 
 	/**
 	* Configure Module
 	*/
 	function configure(){
-
-		// pagination settings
-		"pagination" = {
+		
+		// settings
+		settings = {
 			"defaults" = {
-				"totalPages": 0,
 				"maxRows": 25,
-				"offset": 0,
-				"page": 1,
-				"totalRecords": 0
+				"maxRowsLimit" = 200
 			},
 			"apiPagination" = {
-				"totalPages": 0,
-				"maxRows": 25,
-				"offset": 0,
-				"page": 1,
-				"totalRecords": 0
+				"maxRows": 15,
+				"maxRowsLimit" = 200
 			},
 			"elasticSearch" = {
-				"totalPages": 0,
-				"maxRows": 25,
-				"offset": 0,
-				"page": 1,
-				"totalRecords": 0
+				"maxRows": 50,
+				"maxRowsLimit" = 200
 			},
 			"customPagination" = {
-				"totalPages": 0,
-				"maxRows": 25,
-				"offset": 0,
-				"page": 1,
-				"totalRecords": 0
-			},
-			"maxRowsLimit" = 200
+				"maxRows": 5,
+				"maxRowsLimit" = 100
+			}
 		};
 
-	}
-
-	/**
-	* Development tier
-	*/
-	function development(){
 	}
 
 	/**
