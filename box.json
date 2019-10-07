@@ -19,9 +19,7 @@
     "instructions":"readme.md",
     "changelog":"",
     "type":"",
-    "keywords":[
-
-    ],
+    "keywords":[],
     "private":false,
     "engines":[
         {
@@ -42,18 +40,13 @@
             "url":""
         }
     ],
-    "contributors":[
-
-    ],
-    "dependencies":{
-
-    },
+    "contributors":[],
+    "dependencies":{},
     "devDependencies":{
-
+        "testbox":"^3.1.0+339"
     },
     "installPaths":{
+        "testbox":"testbox/"
     },
-    "ignore":[
-
-    ]
+    "ignore":[]
 }

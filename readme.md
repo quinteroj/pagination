@@ -25,14 +25,14 @@ box install cbpaginator
 You can overwrite the defaults for your app.  This configuration goes in `/config/ColdBox.cfc` in `moduleSettings.pagination` like so:
 
  ```js
-		moduleSettings = {
-			"cbpaginator" = {
-				"defaults" = {
-					"maxRows": 50,
-					"maxRowsLimit" : 250
-				}
-			}
-		}
+moduleSettings = {
+    "cbpaginator": {
+        "defaults": {
+            "maxRows": 50,
+            "maxRowsLimit": 250
+        }
+    }
+}
 ```
 
 ## Settings
@@ -40,65 +40,77 @@ You can overwrite the defaults for your app.  This configuration goes in `/confi
 Here is the complete settings that you get by default.
 
 ```js
-		settings = {
-			"defaults" = {
-				"maxRows": 25,
-				"maxRowsLimit" = 200
-			},
-			"apiPagination" = {
-				"maxRows": 15,
-				"maxRowsLimit" = 200
-			},
-			"elasticSearch" = {
-				"maxRows": 50,
-				"maxRowsLimit" = 200
-			},
-			"customPagination" = {
-				"maxRows": 5,
-				"maxRowsLimit" = 100
-			}
-		};
+settings = {
+    "defaults": {
+        "maxRows": 25,
+        "maxRowsLimit": 200
+    }
+};
 ```
 
 ## Usage
 
 This module provides two functions to build your pagination struct:
 
-1.	`generate( required totalRecords, page, maxRows )` -> returns the pagination struct according to the total records.
+### generate
+
+```js
+public struct function generate(
+    numeric totalRecords = 0,
+    numeric page = 1,
+    numeric maxRows = settings.defaults.maxRows
+)
+```
+
+Returns the pagination struct according to the total records.
 
 If `page` and `maxRows` parameters are not passed in, it will use the default values.
 
 The response will look like the following:
 
 ```js
-			{
-				"totalPages": 0,
-				"maxRows": 25,
-				"offset": 0,
-				"page": 1,
-				"totalRecords": 0
-			}
+{
+    "totalPages": 0,
+    "maxRows": 25,
+    "offset": 0,
+    "page": 1,
+    "totalRecords": 0
+}
 ```
 
-2.	`generateWithResults( required totalRecords, required results, page, maxRows, resultMap=false, resultsKeyName="results" )`
+### generateWithResults
+
+```js
+public struct function generateWithResults(
+    numeric totalRecords = 0,
+    array results = [],
+    numeric page = 1,
+    numeric maxRows = settings.defaults.maxRows,
+    boolean asResultsMap = false,
+    string keyName = "id",
+    string resultsKeyName = "results"
+)
+```
 
 This function returns the same pagination struct as the above along with the results
 
-You can convert your results to be a result Map by changing the default value of `resultsKeyName` to true
+You can convert your results to be a resultsMap by setting `asResultsMap` to `true`
 
 In addition you can set a name for your results key by passing in the `resultsKeyName` value as a parameter. By default this key is called `results`
 
 ```js
-		{
-			"pagination" = {
-				"totalPages": 0,
-				"maxRows": 25,
-				"offset": 0,
-				"page": 1,
-				"totalRecords": 0
-			},
-			"results" = []
-		}
+{
+    "pagination": {
+        "totalPages": 0,
+        "maxRows": 25,
+        "offset": 0,
+        "page": 1,
+        "totalRecords": 0
+    },
+    "results": [],
+    // optional
+    "resultsMap": {}
+}
 ```
 
 
@@ -110,7 +122,7 @@ Because of His grace, this project exists. If you don't like this, then don't re
 By whom also we have access by faith into this grace wherein we stand, and rejoice in hope of the glory of God.
 And not only so, but we glory in tribulations also: knowing that tribulation worketh patience;
 And patience, experience; and experience, hope:
-And hope maketh not ashamed; because the love of God is shed abroad in our hearts by the 
+And hope maketh not ashamed; because the love of God is shed abroad in our hearts by the
 Holy Ghost which is given unto us. ." Romans 5:5
 
 ### THE DAILY BREAD
