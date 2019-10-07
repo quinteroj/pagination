@@ -1,7 +1,7 @@
 {
     "name":"Paginator",
     "slug":"cbpaginator",
-    "version":"1.1.0",
+    "version":"1.2.0",
     "author":"Javier Quintero",
     "shortDescription":"This module builds a pagination struct for API responses and custom data tables.",
     "location":"",
