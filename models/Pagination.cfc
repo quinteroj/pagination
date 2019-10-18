@@ -1,19 +1,28 @@
 /**
  * Pagination CFC to help generate the paginated results needed for API responses and  data tables
  */
-component singleton {
+component singleton accessors="true" {
 
     property name="settings" inject="coldbox:moduleSettings:cbpaginator";
 
-	/**
-	 * Generates a pagination struct
-	 *
-	 * @totalRecords The total record count
+    /**
+     * Creates a new paginator
+     * If using this in ColdBox, these settings will be overridden by WireBox
+     */
+    function init( struct settings = getDefaultSettings() ) {
+        variables.settings = arguments.settings;
+        return this;
+    }
+
+    /**
+     * Generates a pagination struct
+     *
+     * @totalRecords The total record count
      * @page page number (current page)
      * @maxRows Maximum number of rows displayed per page
      *
      * @returns struct -> { "totalPages" : numeric, "maxRows" : numeric, "offset" : numeric, "page" : numeric, "totalRecords": numeric }
-	 */
+     */
     public struct function generate(
         numeric totalRecords = 0,
         numeric page = 1,
@@ -29,7 +38,7 @@ component singleton {
     }
 
     /**
-	 * Generates the pagination struct along with the results
+     * Generates the pagination struct along with the results
      *
      * @totalRecords The total record count
      * @results List with the results ta will be included in the response
@@ -40,7 +49,7 @@ component singleton {
      * @resultsKeyName Results key name to associate to the response
      *
      * @returns struct -> { "pagination" : {}, "results" : "[] }
-	 */
+     */
     public struct function generateWithResults(
         numeric totalRecords = 0,
         array results = [],
@@ -87,6 +96,15 @@ component singleton {
 
             return acc;
         }, { "#resultsKeyName#" = [], "#resultsMapKeyName#" = {} } );
+    }
+
+    private struct function getDefaultSettings() {
+        return {
+            "defaults": {
+                "maxRows": 25,
+                "maxRowsLimit": 200
+            }
+        };
     }
 
 }
