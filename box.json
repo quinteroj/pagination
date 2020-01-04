@@ -48,5 +48,10 @@
     "installPaths":{
         "testbox":"testbox/"
     },
-    "ignore":[]
+    "ignore":[
+      "**/.*",
+      "test",
+      "tests",
+      "travis.yml"
+    ]
 }
