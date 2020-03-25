@@ -20,33 +20,6 @@ Just drop into your modules folder or use the `box` cli to install
 box install cbpaginator
 ```
 
-## ColdBox settings
-
-You can overwrite the defaults for your app.  This configuration goes in `/config/ColdBox.cfc` in `moduleSettings.pagination` like so:
-
- ```js
-moduleSettings = {
-    "cbpaginator": {
-        "defaults": {
-            "maxRows": 50,
-            "maxRowsLimit": 250
-        }
-    }
-}
-```
-
-## Settings
-
-Here is the complete settings that you get by default.
-
-```js
-settings = {
-    "defaults": {
-        "maxRows": 25,
-        "maxRowsLimit": 200
-    }
-};
-```
 
 ## Usage
 
@@ -58,7 +31,7 @@ This module provides two functions to build your pagination struct:
 public struct function generate(
     numeric totalRecords = 0,
     numeric page = 1,
-    numeric maxRows = settings.defaults.maxRows
+    numeric maxRows = 25
 )
 ```
 
