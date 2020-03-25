@@ -44,21 +44,6 @@ component extends="testbox.system.BaseSpec" {
                         "totalRecords": 100
                     } );
                 } );
-
-                it( "can caps the maxrows with the maxRowsLimit", function() {
-                    var settings = getSettings();
-                    settings.defaults.maxRowsLimit = 10;
-                    var paginator = createMock( "models.Pagination" );
-                    paginator.$property( propertyName = "settings", mock = settings );
-                    var result = paginator.generate( 100, 3, 25 );
-                    expect( result ).toBe( {
-                        "maxRows": 10,
-                        "offset": 20,
-                        "page": 3,
-                        "totalPages": 10,
-                        "totalRecords": 100
-                    } );
-                } );
             } );
 
             describe( "generateWithResults", function() {
@@ -109,25 +94,6 @@ component extends="testbox.system.BaseSpec" {
                             "maxRows": 10,
                             "offset": 10,
                             "page": 2,
-                            "totalPages": 10,
-                            "totalRecords": 100
-                        },
-                        "results": mockResults
-                    } );
-                } );
-
-                it( "can caps the maxrows with the maxRowsLimit", function() {
-                    var settings = getSettings();
-                    settings.defaults.maxRowsLimit = 10;
-                    var paginator = createMock( "models.Pagination" );
-                    paginator.$property( propertyName = "settings", mock = settings );
-                    var mockResults = [ { "id": 1 }, { "id": 2 }, { "id": 3 } ];
-                    var result = paginator.generateWithResults( 100, mockResults, 3, 25 );
-                    expect( result ).toBe( {
-                        "pagination": {
-                            "maxRows": 10,
-                            "offset": 20,
-                            "page": 3,
                             "totalPages": 10,
                             "totalRecords": 100
                         },

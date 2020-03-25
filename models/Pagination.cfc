@@ -3,17 +3,6 @@
  */
 component singleton accessors="true" {
 
-    property name="settings" inject="coldbox:moduleSettings:cbpaginator";
-
-    /**
-     * Creates a new paginator
-     * If using this in ColdBox, these settings will be overridden by WireBox
-     */
-    function init( struct settings = getDefaultSettings() ) {
-        variables.settings = arguments.settings;
-        return this;
-    }
-
     /**
      * Generates a pagination struct
      *
@@ -26,11 +15,11 @@ component singleton accessors="true" {
     public struct function generate(
         numeric totalRecords = 0,
         numeric page = 1,
-        numeric maxRows = settings.defaults.maxRows
+        numeric maxRows = 25
     ) {
         var pagination = {};
         pagination[ "totalRecords" ] = arguments.totalRecords;
-        pagination[ "maxRows" ] = clamp( 0, arguments.maxRows, settings.defaults.maxRowsLimit );
+        pagination[ "maxRows" ] = max( 0, arguments.maxRows );
         pagination[ "totalPages" ] = pagination.maxRows != 0 ? ceiling( pagination.totalRecords / pagination.maxRows ) : 0;
         pagination[ "page" ] = clamp( 1, arguments.page, pagination.totalPages );
         pagination[ "offset" ] = ( pagination.page - 1 ) * pagination.maxRows;
@@ -54,7 +43,7 @@ component singleton accessors="true" {
         numeric totalRecords = 0,
         array results = [],
         numeric page = 1,
-        numeric maxRows = settings.defaults.maxRows,
+        numeric maxRows = 25,
         boolean asResultsMap = false,
         string keyName = "id",
         string resultsKeyName = "results"
@@ -96,15 +85,6 @@ component singleton accessors="true" {
 
             return acc;
         }, { "#resultsKeyName#" = [], "#resultsMapKeyName#" = {} } );
-    }
-
-    private struct function getDefaultSettings() {
-        return {
-            "defaults": {
-                "maxRows": 25,
-                "maxRowsLimit": 200
-            }
-        };
     }
 
 }
