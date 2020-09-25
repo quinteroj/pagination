@@ -87,4 +87,19 @@ component singleton accessors="true" {
         }, { "#resultsKeyName#" = [], "#resultsMapKeyName#" = {} } );
     }
 
+    /******************************** HELPER FUNCTIONS ******************************/
+
+    /**
+	 * Calculate the starting offset for the incoming page
+	 *
+	 * @page The page to lookup on
+     * @maxRows The max rows number so we can calculate the offset (defaults to 25)
+	 * @param-page { "schema" : { "type" : "integer", "minimum" : 1, "default" : 1 } }
+	 *
+	 * @return The page start offset
+	 */
+	public function getPageOffset( page = 1, maxRows = 25 ){
+		return ( arguments.page * arguments.maxRows - arguments.maxRows );
+	}
+
 }

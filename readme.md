@@ -23,6 +23,12 @@ box install cbpaginator
 
 ## Usage
 
+First you will need to inject the paginator into your service/handler:
+
+```js
+property name="cbpaginator" inject="Pagination@cbpaginator";
+```
+
 This module provides two functions to build your pagination struct:
 
 ### generate
@@ -86,18 +92,19 @@ In addition you can set a name for your results key by passing in the `resultsKe
 }
 ```
 
+## Helper Method
 
-#### HONOR GOES TO GOD ABOVE ALL
+### getPageOffset
 
-Because of His grace, this project exists. If you don't like this, then don't read it, its not for you.
+Since we have to calculate the offset before we filter our data we can use the `getPageOffset()` function to calculate that number for us
 
-> "Therefore being justified by faith, we have peace with God through our Lord Jesus Christ:
-By whom also we have access by faith into this grace wherein we stand, and rejoice in hope of the glory of God.
-And not only so, but we glory in tribulations also: knowing that tribulation worketh patience;
-And patience, experience; and experience, hope:
-And hope maketh not ashamed; because the love of God is shed abroad in our hearts by the
-Holy Ghost which is given unto us. ." Romans 5:5
+```js
+	public function getPageOffset( 
+        page = 1,
+        maxRows = 25 
+    )
+```
 
-### THE DAILY BREAD
+This function receives two arguments. The `page` number and the `maxRows` to retrieve. If no params are passed in, the defaults will be used.
 
- > "I am the way, and the truth, and the life; no one comes to the Father, but by me (JESUS)" Jn 14:1-12
+
