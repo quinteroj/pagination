@@ -63,6 +63,64 @@ component singleton accessors="true" {
         return response;
     }
 
+    /**
+     * Generates a simple pagination struct.
+     *
+     * @hasMore Boolean flag if there are more results
+     * @page page number (current page)
+     * @maxRows Maximum number of rows displayed per page
+     *
+     * @returns struct -> { "hasMore" : boolean, "maxRows" : numeric, "offset" : numeric, "page" : numeric }
+     */
+    public struct function generateSimple(
+        required boolean hasMore,
+        numeric page = 1,
+        numeric maxRows = 25
+    ) {
+        var pagination = {};
+        pagination[ "maxRows" ] = max( 0, arguments.maxRows );
+        pagination[ "page" ] = arguments.page;
+        pagination[ "offset" ] = ( pagination.page - 1 ) * pagination.maxRows;
+        pagination[ "hasMore" ] = arguments.hasMore;
+        return pagination;
+    }
+
+    /**
+     * Generates the simple pagination struct along with the results
+     *
+     * @results List with the results ta will be included in the response
+     * @page page number (current page)
+     * @maxRows Maximum number of rows displayed per page
+     * @resultMap Flag to determine if we want a result map for the results
+     * @keyName Name of the key to find in each record for a results map
+     * @resultsKeyName Results key name to associate to the response
+     *
+     * @returns struct -> { "pagination" : {}, "results" : "[] }
+     */
+    public struct function generateSimpleWithResults(
+        array results = [],
+        numeric page = 1,
+        numeric maxRows = 25,
+        boolean asResultsMap = false,
+        string keyName = "id",
+        string resultsKeyName = "results"
+    ) {
+        var response = {};
+        response[ "pagination" ] = generateSimple(
+            arguments.results.len() > arguments.maxRows,
+            arguments.page,
+            arguments.maxRows
+        );
+        arguments.results = arguments.results.slice( 1, min( arguments.results.len(), arguments.maxRows ) );
+        structAppend(
+            response,
+            arguments.asResultsMap ?
+                generateResultsMap( arguments.results, arguments.keyName, arguments.resultsKeyName ) :
+                { "#arguments.resultsKeyName#" = arguments.results }
+        );
+        return response;
+    }
+
     private numeric function clamp( lowerLimit, result, upperLimit ) {
         arguments.result = ceiling( arguments.result );
         arguments.result = min( arguments.result, arguments.upperLimit );
