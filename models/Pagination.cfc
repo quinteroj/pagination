@@ -111,7 +111,7 @@ component singleton accessors="true" {
             arguments.page,
             arguments.maxRows
         );
-        arguments.results = arguments.results.slice( 1, min( arguments.results.len(), arguments.maxRows ) );
+        arguments.results = arguments.results.len() ? arguments.results.slice( 1, min( arguments.results.len(), arguments.maxRows ) ) : [];
         structAppend(
             response,
             arguments.asResultsMap ?
