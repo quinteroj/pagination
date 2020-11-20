@@ -92,6 +92,50 @@ In addition you can set a name for your results key by passing in the `resultsKe
 }
 ```
 
+### generateSimple
+
+```js
+public struct function generateSimple(
+        required boolean hasMore,
+        numeric page = 1,
+        numeric maxRows = 25
+    )
+```
+
+Generates a simple pagination struct with the following struct
+
+```js
+{ "hasMore" : boolean, "maxRows" : numeric, "offset" : numeric, "page" : numeric }
+```
+
+### generateSimpleWithResults
+
+```js
+public struct function generateSimpleWithResults(
+        array results = [],
+        numeric page = 1,
+        numeric maxRows = 25,
+        boolean asResultsMap = false,
+        string keyName = "id",
+        string resultsKeyName = "results"
+    )
+```
+
+Generates a simple pagination struct with along with the results following struct
+
+### reduceAndGenerate
+
+```js
+public struct function reduceAndGenerate( 
+        required array results, 
+        numeric page = 0, 
+        maxRows = 25 
+    )
+```
+
+Reduce and paginate an array to bring back only the records requested in the page. Very useful when we want to sort all the results first and then paginate them
+
+
 ## Helper Method
 
 ### getPageOffset

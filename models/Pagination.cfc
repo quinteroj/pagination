@@ -121,6 +121,41 @@ component singleton accessors="true" {
         return response;
     }
 
+    /**
+     * Reduce and paginate an array to bring back only the records requested in the page
+     *
+     * @results Array to be reduced
+     * @page page number (current page)
+     * @maxRows Number of records per page
+     *
+     * @returns struct -> { "pagination" : {}, "results" : "[] }
+     */
+    public struct function reduceAndGenerate( 
+        required array results, 
+        numeric page = 0, 
+        maxRows = 25 
+    ) {
+        var response = { "pagination": {}, "results": [] };
+        var totalRecords = results.len();
+
+        response[ "pagination" ] = generate(
+            totalRecords,
+            page,
+            maxRows
+        );
+
+        var start = ( ( response.pagination.page - 1 ) * maxRows ) + 1;
+        maxRows = start + maxRows > totalRecords ? totalRecords - start + 1 : maxRows;
+
+        if( start < totalRecords ) {
+            response[ "results" ] = arraySlice( results, start, maxRows );
+        } else {
+            response[ "results" ] = [];
+        }
+
+        return response;
+    }
+
     private numeric function clamp( lowerLimit, result, upperLimit ) {
         arguments.result = ceiling( arguments.result );
         arguments.result = min( arguments.result, arguments.upperLimit );
