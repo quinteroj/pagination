@@ -107,11 +107,11 @@ component singleton accessors="true" {
     ) {
         var response = {};
         response[ "pagination" ] = generateSimple(
-            arguments.results.len() > arguments.maxRows,
+            arrayLen( arguments.results ) > arguments.maxRows,
             arguments.page,
             arguments.maxRows
         );
-        arguments.results = arguments.results.len() ? arguments.results.slice( 1, min( arguments.results.len(), arguments.maxRows ) ) : [];
+        arguments.results = arrayLen( arguments.results ) ? arguments.results.slice( 1, min( arrayLen( arguments.results ), arguments.maxRows ) ) : [];
         structAppend(
             response,
             arguments.asResultsMap ?
@@ -136,7 +136,7 @@ component singleton accessors="true" {
         maxRows = 25 
     ) {
         var response = { "pagination": {}, "results": [] };
-        var totalRecords = results.len();
+        var totalRecords = arrayLen( results );
 
         response[ "pagination" ] = generate(
             totalRecords,
