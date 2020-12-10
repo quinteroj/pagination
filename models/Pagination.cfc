@@ -147,7 +147,7 @@ component singleton accessors="true" {
         var start = ( ( response.pagination.page - 1 ) * maxRows ) + 1;
         maxRows = start + maxRows > totalRecords ? totalRecords - start + 1 : maxRows;
 
-        if( start < totalRecords ) {
+        if( start <= totalRecords ) {
             response[ "results" ] = arraySlice( results, start, maxRows );
         } else {
             response[ "results" ] = [];
