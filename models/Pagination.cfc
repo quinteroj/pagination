@@ -23,6 +23,7 @@ component singleton accessors="true" {
         pagination[ "totalPages" ] = pagination.maxRows != 0 ? ceiling( pagination.totalRecords / pagination.maxRows ) : 0;
         pagination[ "page" ] = clamp( 1, arguments.page, pagination.totalPages );
         pagination[ "offset" ] = ( pagination.page - 1 ) * pagination.maxRows;
+	pagination[ "offset" ] = ( pagination[ "offset" ] >= 1 ) ? pagination[ "offset" ] : 1;
         return pagination;
     }
 
