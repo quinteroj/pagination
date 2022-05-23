@@ -14,6 +14,12 @@
         "type":"github",
         "url":"https://github.com/quinteroj/pagination"
     },
+    "license":[
+        {
+            "type":"MIT",
+            "URL":"https://github.com/quinteroj/pagination/LICENSE"
+        }
+    ],
     "bugs":"",
     "description":"",
     "instructions":"readme.md",
@@ -34,12 +40,6 @@
     "defaultEngine":"",
     "defaultPort":0,
     "projectURL":"https://github.com/quinteroj/pagination",
-    "license":[
-        {
-            "type":"",
-            "url":""
-        }
-    ],
     "contributors":[],
     "dependencies":{},
     "devDependencies":{
