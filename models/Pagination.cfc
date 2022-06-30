@@ -18,11 +18,11 @@ component singleton accessors="true" {
         numeric maxRows = 25
     ) {
         var pagination = {};
-        pagination[ "totalRecords" ] = arguments.totalRecords;
-        pagination[ "maxRows" ] = max( 0, arguments.maxRows );
-        pagination[ "totalPages" ] = pagination.maxRows != 0 ? ceiling( pagination.totalRecords / pagination.maxRows ) : 0;
-        pagination[ "page" ] = clamp( 1, arguments.page, pagination.totalPages );
-        pagination[ "offset" ] = ( pagination.page - 1 ) * pagination.maxRows;
+        pagination[ "totalRecords" ] = int( arguments.totalRecords );
+        pagination[ "maxRows" ] = int( max( 0, arguments.maxRows ) );
+        pagination[ "totalPages" ] = int( pagination.maxRows != 0 ? ceiling( pagination.totalRecords / pagination.maxRows ) : 0 );
+        pagination[ "page" ] = int( clamp( 1, arguments.page, pagination.totalPages ) );
+        pagination[ "offset" ] = int( ( pagination.page - 1 ) * pagination.maxRows );
         return pagination;
     }
 
@@ -78,9 +78,9 @@ component singleton accessors="true" {
         numeric maxRows = 25
     ) {
         var pagination = {};
-        pagination[ "maxRows" ] = max( 0, arguments.maxRows );
-        pagination[ "page" ] = arguments.page;
-        pagination[ "offset" ] = ( pagination.page - 1 ) * pagination.maxRows;
+        pagination[ "maxRows" ] = int( max( 0, arguments.maxRows ) );
+        pagination[ "page" ] = int( arguments.page );
+        pagination[ "offset" ] = int( ( pagination.page - 1 ) * pagination.maxRows );
         pagination[ "hasMore" ] = arguments.hasMore;
         return pagination;
     }
