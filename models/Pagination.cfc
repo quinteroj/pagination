@@ -41,7 +41,7 @@ component singleton accessors="true" {
      */
     public struct function generateWithResults(
         numeric totalRecords = 0,
-        array results = [],
+        any results = [],
         numeric page = 1,
         numeric maxRows = 25,
         boolean asResultsMap = false,
@@ -130,10 +130,10 @@ component singleton accessors="true" {
      *
      * @returns struct -> { "pagination" : {}, "results" : "[] }
      */
-    public struct function reduceAndGenerate( 
-        required array results, 
-        numeric page = 0, 
-        maxRows = 25 
+    public struct function reduceAndGenerate(
+        required array results,
+        numeric page = 0,
+        maxRows = 25
     ) {
         var response = { "pagination": {}, "results": [] };
         var totalRecords = arrayLen( results );
@@ -163,7 +163,7 @@ component singleton accessors="true" {
     }
 
     private struct function generateResultsMap(
-        required array results,
+        required any results,
         string keyName = "id",
         string resultsKeyName = "results"
     ) {
