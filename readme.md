@@ -12,6 +12,10 @@ Apache License, Version 2.0.
 - Adobe ColdFusion 2016+
 - Lucee 4.5 or later
 
+## REPOSITORY
+
+The official repository for the [cbPaginator](https://forgebox.io/view/cbpaginator) module can be found [here](https://github.com/quinteroj/pagination).
+
 ## Instructions
 
 Just drop into your modules folder or use the `box` cli to install
