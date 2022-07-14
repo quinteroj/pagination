@@ -17,7 +17,7 @@ component extends="testbox.system.BaseSpec" {
                             "totalRecords": 100
                         } );
                     } );
-    
+
                     it( "can generate pagination for a different page", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -31,7 +31,7 @@ component extends="testbox.system.BaseSpec" {
                             "totalRecords": 100
                         } );
                     } );
-    
+
                     it( "can generate pagination with a custom maxRows", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -46,7 +46,7 @@ component extends="testbox.system.BaseSpec" {
                         } );
                     } );
                 } );
-    
+
                 describe( "generateWithResults", function() {
                     it( "it can generate pagination with defaults", function() {
                         var settings = getSettings();
@@ -65,7 +65,7 @@ component extends="testbox.system.BaseSpec" {
                             "results": mockResults
                         } );
                     } );
-    
+
                     it( "can generate pagination for a different page", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -83,7 +83,7 @@ component extends="testbox.system.BaseSpec" {
                             "results": mockResults
                         } );
                     } );
-    
+
                     it( "can generate pagination with a custom maxRows", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -101,7 +101,7 @@ component extends="testbox.system.BaseSpec" {
                             "results": mockResults
                         } );
                     } );
-    
+
                     it( "can create a results map instead of an array for results", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -120,7 +120,7 @@ component extends="testbox.system.BaseSpec" {
                             "resultsMap": { "1": { "id": 1 }, "2": { "id": 2 }, "3": { "id": 3 } }
                         } );
                     } );
-    
+
                     it( "can use a custom keyName when generating the resultsMap", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -139,7 +139,7 @@ component extends="testbox.system.BaseSpec" {
                             "resultsMap": { "1": { "myId": 1 }, "2": { "myId": 2 }, "3": { "myId": 3 } }
                         } );
                     } );
-    
+
                     it( "can use a resultsKeyName when generating the resultsMap", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -158,7 +158,7 @@ component extends="testbox.system.BaseSpec" {
                             "stuffMap": { "1": { "myId": 1 }, "2": { "myId": 2 }, "3": { "myId": 3 } }
                         } );
                     } );
-    
+
                     it( "can call getters when generating the resultsMap", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -173,6 +173,43 @@ component extends="testbox.system.BaseSpec" {
                             "totalRecords": 100
                         } );
                         expect( result.results ).toBe( [ 1, 2, 3 ] );
+                    } );
+
+                    it( "it can generate pagination with a query instead of an array", function() {
+                        var settings = getSettings();
+                        var paginator = createMock( "models.Pagination" );
+                        paginator.$property( propertyName = "settings", mock = settings );
+                        var mockResults = queryNew( "id", "integer", [ { "id": 1 }, { "id": 2 }, { "id": 3 } ] );
+                        var result = paginator.generateWithResults( 100, mockResults );
+                        expect( result ).toBe( {
+                            "pagination": {
+                                "maxRows": 25,
+                                "offset": 0,
+                                "page": 1,
+                                "totalPages": 4,
+                                "totalRecords": 100
+                            },
+                            "results": mockResults
+                        } );
+                    } );
+
+                    it( "can create a results map using a query", function() {
+                        var settings = getSettings();
+                        var paginator = createMock( "models.Pagination" );
+                        paginator.$property( propertyName = "settings", mock = settings );
+                        var mockResults = queryNew( "id", "integer", [ { "id": 1 }, { "id": 2 }, { "id": 3 } ] );
+                        var result = paginator.generateWithResults( 100, mockResults, 3, 25, true );
+                        expect( result ).toBe( {
+                            "pagination": {
+                                "maxRows": 25,
+                                "offset": 50,
+                                "page": 3,
+                                "totalPages": 4,
+                                "totalRecords": 100
+                            },
+                            "results": [ 1, 2, 3 ],
+                            "resultsMap": { "1": { "id": 1 }, "2": { "id": 2 }, "3": { "id": 3 } }
+                        } );
                     } );
                 } );
             } );
@@ -191,7 +228,7 @@ component extends="testbox.system.BaseSpec" {
                             "hasMore": true
                         } );
                     } );
-    
+
                     it( "can generate pagination for a different page", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -204,7 +241,7 @@ component extends="testbox.system.BaseSpec" {
                             "hasMore": false
                         } );
                     } );
-    
+
                     it( "can generate pagination with a custom maxRows", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -236,7 +273,7 @@ component extends="testbox.system.BaseSpec" {
                             "results": mockResults
                         } );
                     } );
-    
+
                     it( "can generate pagination for a different page", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -253,7 +290,7 @@ component extends="testbox.system.BaseSpec" {
                             "results": mockResults
                         } );
                     } );
-    
+
                     it( "can generate pagination with a custom maxRows", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -271,7 +308,7 @@ component extends="testbox.system.BaseSpec" {
                             "results": mockResults.slice( 1, maxRows )
                         } );
                     } );
-    
+
                     it( "can create a results map instead of an array for results", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -289,7 +326,7 @@ component extends="testbox.system.BaseSpec" {
                             "resultsMap": { "1": { "id": 1 }, "2": { "id": 2 }, "3": { "id": 3 } }
                         } );
                     } );
-    
+
                     it( "can use a custom keyName when generating the resultsMap", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -307,7 +344,7 @@ component extends="testbox.system.BaseSpec" {
                             "resultsMap": { "1": { "myId": 1 }, "2": { "myId": 2 }, "3": { "myId": 3 } }
                         } );
                     } );
-    
+
                     it( "can use a resultsKeyName when generating the resultsMap", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
@@ -325,7 +362,7 @@ component extends="testbox.system.BaseSpec" {
                             "stuffMap": { "1": { "myId": 1 }, "2": { "myId": 2 }, "3": { "myId": 3 } }
                         } );
                     } );
-    
+
                     it( "can call getters when generating the resultsMap", function() {
                         var settings = getSettings();
                         var paginator = createMock( "models.Pagination" );
